@@ -8,4 +8,6 @@ To add a key
 4. Get a file called "My Project-(numbers).json"
 5. Copy that file's contents into textbox and click "Add Key"
 
+It'll be stored in the app's local directory - ~/AppData/Local/Packages/(app guid)/JsonKey.json
+
 First million characters are free to translate with. Google probably charges for the rest
