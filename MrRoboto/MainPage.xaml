@@ -50,24 +50,35 @@
                     Content="Add Key" FontSize="32" Background="Gray" 
                     Click="AddKey_OnClick"/>
         </StackPanel>
-        <ListView Margin="30,0,0,0" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" 
-                  Name="Saved" ItemsSource="{Binding SavedTranslations}" IsItemClickEnabled="False">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="x:String">
-                    <TextBlock Text="{x:Bind}" FontSize="24"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate>
-                                <ContentPresenter/>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListView.ItemContainerStyle>
-        </ListView>
+        <StackPanel Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="30" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="VocabBin" Content="🗑" FontSize="24" Background="LightCoral" Width="50" Margin="20,0,0,0" Click="VocabLoad_OnClick" />
+                <Button Name="VocabClear" Content="🗌" FontSize="24" Background="LightCoral" Width="50" Margin="20,0,0,0" Click="VocabLoad_OnClick" />
+                <Button Name="VocabSave" Content="↡" FontSize="24" Background="LightCoral" Width="50" Margin="20,0,0,0" Click="VocabSave_OnClick" />
+                <Button Name="VocabLoad" Content="⭮" FontSize="24" Background="LightCoral" Width="50" Margin="20,0,0,0" Click="VocabLoad_OnClick" />
+                
+                
+            </StackPanel>
+            <ListView 
+                      Name="Saved" ItemsSource="{Binding SavedTranslations}" IsItemClickEnabled="False" BorderBrush="Black" BorderThickness="2">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="x:String">
+                        <TextBlock Text="{x:Bind}" FontSize="24"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <ContentPresenter/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+            
+        </StackPanel>
     </Grid>
 </Page>

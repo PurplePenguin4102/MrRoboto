@@ -43,6 +43,16 @@ namespace MrRoboto
             Frame.Navigate(typeof(Page2));
         }
 
+        private void VocabSave_OnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void VocabLoad_OnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var ctx = this.DataContext as MainViewModel;
