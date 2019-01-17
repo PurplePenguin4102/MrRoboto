@@ -43,14 +43,39 @@ namespace MrRoboto
             Frame.Navigate(typeof(Page2));
         }
 
-        private void VocabSave_OnClick(object sender, RoutedEventArgs e)
+        private async void Save_Click(object sender, RoutedEventArgs e)
         {
-
+            var ctx = DataContext as MainViewModel;
+            await ctx.SaveVocab();
         }
 
-        private void VocabLoad_OnClick(object sender, RoutedEventArgs e)
+        private async void Open_Click(object sender, RoutedEventArgs e)
         {
+            var ctx = DataContext as MainViewModel;
+            await ctx.LoadVocab();
+        }
 
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var ctx = DataContext as MainViewModel;
+            ctx.DeleteVocab();
+        }
+
+        private void Clear_Click(object sender, RoutedEventArgs e)
+        {
+            var ctx = DataContext as MainViewModel;
+            ctx.ClearScreen();
+        }
+
+        private void DeleteThis_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as Button;
+            var ctx = DataContext as MainViewModel;
+            var ph = btn.DataContext as Phrase;
+            if (ctx != null && ph != null)
+            {
+                ctx.DeletePhrase(ph);
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -69,10 +94,7 @@ namespace MrRoboto
             {
                 var vm = DataContext as MainViewModel;
                 if (vm == null || string.IsNullOrEmpty(Ego.Text)) return;
-                if (!vm.SavedTranslations.Contains($"{Hiragana.Text} : {Ego.Text}"))
-                {
-                    vm.SavedTranslations.Add($"{Hiragana.Text} : {Ego.Text}");
-                }
+                vm.AddPhrase(new Phrase() { Kana = Hiragana.Text, Ego = Ego.Text });
             }
         }
     }

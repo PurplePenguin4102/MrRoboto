@@ -98,6 +98,7 @@
     <Compile Include="Converters\BoolToVisConverter.cs" />
     <Compile Include="Converters\KanaKonverter.cs" />
     <Compile Include="Converters\ReverseBoolToVisConverter.cs" />
+    <Compile Include="Phrase.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

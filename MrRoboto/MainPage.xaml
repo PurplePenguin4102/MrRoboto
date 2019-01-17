@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    KeyDown="EnterKeyPressed"
     Background="CornflowerBlue">
     <Page.DataContext>
         <local:MainViewModel/>
@@ -50,35 +51,39 @@
                     Content="Add Key" FontSize="32" Background="Gray" 
                     Click="AddKey_OnClick"/>
         </StackPanel>
+        
         <StackPanel Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="30" >
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Name="VocabBin" Content="🗑" FontSize="24" Background="LightCoral" Width="50" Margin="20,0,0,0" Click="VocabLoad_OnClick" />
-                <Button Name="VocabClear" Content="🗌" FontSize="24" Background="LightCoral" Width="50" Margin="20,0,0,0" Click="VocabLoad_OnClick" />
-                <Button Name="VocabSave" Content="↡" FontSize="24" Background="LightCoral" Width="50" Margin="20,0,0,0" Click="VocabSave_OnClick" />
-                <Button Name="VocabLoad" Content="⭮" FontSize="24" Background="LightCoral" Width="50" Margin="20,0,0,0" Click="VocabLoad_OnClick" />
-                
-                
-            </StackPanel>
-            <ListView 
-                      Name="Saved" ItemsSource="{Binding SavedTranslations}" IsItemClickEnabled="False" BorderBrush="Black" BorderThickness="2">
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="x:String">
-                        <TextBlock Text="{x:Bind}" FontSize="24"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate>
-                                    <ContentPresenter/>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListView.ItemContainerStyle>
-            </ListView>
-            
+            <CommandBar Height="48" HorizontalAlignment="left">
+                <AppBarButton x:Name="SaveButton" Icon="SaveLocal" Tapped="Save_Click" Height="48"/>
+                <AppBarButton x:Name="OpenButton" Icon="OpenLocal" Tapped="Open_Click" Height="48"/>
+                <AppBarButton x:Name="ClearButton" Icon="ClearSelection" Tapped="Clear_Click" Height="48"/>
+                <AppBarButton x:Name="DeleteButton" Icon="Delete" Tapped="Delete_Click" Height="48"/>
+            </CommandBar>
+            <ScrollViewer>
+                <ListView Name="Saved" ItemsSource="{Binding SavedTranslations}" IsItemClickEnabled="False">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="local:Phrase">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{x:Bind Kana}" FontSize="24"/>
+                                <TextBlock Text="::" FontSize="24"/>
+                                <TextBlock Text="{x:Bind Ego}" FontSize="24"/>
+                                <Button Content="-" Foreground="OrangeRed" Click="DeleteThis_Click"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <ContentPresenter/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </ScrollViewer>
         </StackPanel>
     </Grid>
 </Page>
